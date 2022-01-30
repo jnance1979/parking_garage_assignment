@@ -162,11 +162,12 @@ while flag == True:
         event.wait(.50)
     else:
         for instance in Garage.all:
-            amount_due = (Garage.base_cost * instance.hours) * instance.rate
-            print(f'The amount due is ${amount_due}.')
-            event.wait(.50)
-            flag = False
-            break
+            if user_ticket == instance.number:
+                amount_due = (Garage.base_cost * instance.hours) * instance.rate
+                print(f'The amount due is ${amount_due}.')
+                event.wait(.50)
+                flag = False
+                break
 while Garage.status["paid"] == False:
     pay_for_parking()
 
